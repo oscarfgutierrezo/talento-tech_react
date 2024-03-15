@@ -20,6 +20,14 @@ export const Header = () => {
             Users
           </Link>
         </li>
+        <li>
+          <Link
+            className="transition-all duration-300 hover:text-yellow-300"
+            to="/example"
+          >
+            Example
+          </Link>
+        </li>
       </ul>
       <Link
         className="transition-all duration-300 hover:text-yellow-300"
