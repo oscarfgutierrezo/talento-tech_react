@@ -7,9 +7,9 @@ export const Header = () => {
         <li>
           <Link
             className="transition-all duration-300 hover:text-yellow-300"
-            to="/"
+            to="/create-user"
           >
-            Home
+            Create User
           </Link>
         </li>
         <li>
