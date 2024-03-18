@@ -1,6 +1,32 @@
+import { useDispatch } from "react-redux";
+import { addUser } from "../features/userSlice";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 export const UserForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    id: "",
+    password: "",
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(addUser(user));
+    navigate("/user");
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value,
+    });
   };
 
   return (
@@ -17,6 +43,8 @@ export const UserForm = () => {
             name="name"
             placeholder="Name"
             className="shadow appearance-none border rounded w-full focus:shadow-outline"
+            onChange={handleInputChange}
+            value={user.name}
           />
         </div>
         <div className="mb-4">
@@ -27,6 +55,8 @@ export const UserForm = () => {
             name="lastname"
             placeholder="Lastname"
             className="shadow appearance-none border rounded w-full focus:shadow-outline"
+            onChange={handleInputChange}
+            value={user.lastname}
           />
         </div>
         <div className="mb-4">
@@ -37,6 +67,8 @@ export const UserForm = () => {
             name="email"
             placeholder="Email"
             className="shadow appearance-none border rounded w-full focus:shadow-outline"
+            onChange={handleInputChange}
+            value={user.email}
           />
         </div>
         <div className="mb-4">
@@ -49,6 +81,8 @@ export const UserForm = () => {
             name="id"
             placeholder="Identification"
             className="shadow appearance-none border rounded w-full focus:shadow-outline"
+            onChange={handleInputChange}
+            value={user.id}
           />
         </div>
         <div className="mb-4">
@@ -59,6 +93,8 @@ export const UserForm = () => {
             name="password"
             placeholder="Password"
             className="shadow appearance-none border rounded w-full focus:shadow-outline"
+            onChange={handleInputChange}
+            value={user.password}
           />
         </div>
         <div className="flex justify-center">
