@@ -1,7 +1,14 @@
 export const UserForm = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="max-w-md w-full mx-auto px-5 py-5">
-      <form action="" className="shadow-md rounded pt-6 pb-10 mb-4 px-10">
+      <form
+        onSubmit={handleSubmit}
+        className="shadow-md rounded pt-6 pb-10 mb-4 px-10"
+      >
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2">Name</label>
           <input
@@ -56,7 +63,7 @@ export const UserForm = () => {
         </div>
         <div className="flex justify-center">
           <button
-            type="button"
+            type="submit"
             className="bg-blue-500 hover:bg-blue-700 rounded text-blue-50 font-bold py-2 px-4"
           >
             Save
