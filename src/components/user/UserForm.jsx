@@ -1,11 +1,13 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../features/userSlice";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const UserForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
+  const users = useSelector((state) => state.users);
 
   const [user, setUser] = useState({
     name: "",
@@ -28,6 +30,14 @@ export const UserForm = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    if (params.id) {
+      const id = Number(params.id);
+      const user = users.find((user) => user.id === id);
+      setUser(user);
+    }
+  }, [params.id]);
 
   return (
     <div className="max-w-md w-full mx-auto px-5 py-5">
