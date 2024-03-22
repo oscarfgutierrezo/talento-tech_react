@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { decreaseNumber, increaseNumber } from "../features/numberSlice";
+import { decreaseNumber, increaseNumber } from "../../features/numberSlice";
 
 export const ButtonExample = () => {
   const number = useSelector((state) => state.number.value);

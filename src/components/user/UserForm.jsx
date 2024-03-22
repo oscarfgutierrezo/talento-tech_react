@@ -1,13 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../features/userSlice";
+import { useCreateUserMutation } from "../../features/api/apiSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export const UserForm = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
-  const users = useSelector((state) => state.users);
+  const [createUser] = useCreateUserMutation();
 
   const [user, setUser] = useState({
     name: "",
@@ -19,7 +17,7 @@ export const UserForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addUser(user));
+    createUser(user);
     navigate("/user");
   };
 
@@ -34,8 +32,8 @@ export const UserForm = () => {
   useEffect(() => {
     if (params.id) {
       const id = Number(params.id);
-      const user = users.find((user) => user.id === id);
-      setUser(user);
+      // const user = users.find((user) => user.id === id);
+      // setUser(user);
     }
   }, [params.id]);
 
