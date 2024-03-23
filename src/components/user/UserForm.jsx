@@ -1,48 +1,24 @@
-import { useCreateUserMutation } from "../../features/api/apiSlice";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-
-export const UserForm = () => {
-  const navigate = useNavigate();
-  const params = useParams();
-  const [createUser] = useCreateUserMutation();
-
-  const [user, setUser] = useState({
-    name: "",
-    lastname: "",
-    email: "",
-    id: "",
-    password: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createUser(user);
-    navigate("/user");
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
-  };
-
-  useEffect(() => {
-    if (params.id) {
-      const id = Number(params.id);
-      // const user = users.find((user) => user.id === id);
-      // setUser(user);
-    }
-  }, [params.id]);
-
+export const UserForm = ({ user, handleSubmit }) => {
   return (
     <div className="max-w-md w-full mx-auto px-5 py-5">
       <form
         onSubmit={handleSubmit}
         className="shadow-md rounded pt-6 pb-10 mb-4 px-10"
       >
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2">
+            Identification
+          </label>
+          <input
+            disabled
+            type="text"
+            required
+            name="id"
+            placeholder="Identification"
+            className="shadow appearance-none border rounded w-full focus:shadow-outline"
+            value={user?._id}
+          />
+        </div>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2">Name</label>
           <input
@@ -51,8 +27,7 @@ export const UserForm = () => {
             name="name"
             placeholder="Name"
             className="shadow appearance-none border rounded w-full focus:shadow-outline"
-            onChange={handleInputChange}
-            value={user.name}
+            value={user?.name}
           />
         </div>
         <div className="mb-4">
@@ -63,8 +38,7 @@ export const UserForm = () => {
             name="lastname"
             placeholder="Lastname"
             className="shadow appearance-none border rounded w-full focus:shadow-outline"
-            onChange={handleInputChange}
-            value={user.lastname}
+            value={user?.lastname}
           />
         </div>
         <div className="mb-4">
@@ -75,36 +49,23 @@ export const UserForm = () => {
             name="email"
             placeholder="Email"
             className="shadow appearance-none border rounded w-full focus:shadow-outline"
-            onChange={handleInputChange}
-            value={user.email}
+            value={user?.email}
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
-            Identification
-          </label>
-          <input
-            type="number"
-            required
-            name="id"
-            placeholder="Identification"
-            className="shadow appearance-none border rounded w-full focus:shadow-outline"
-            onChange={handleInputChange}
-            value={user.id}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">Password</label>
-          <input
-            type="password"
-            required
-            name="password"
-            placeholder="Password"
-            className="shadow appearance-none border rounded w-full focus:shadow-outline"
-            onChange={handleInputChange}
-            value={user.password}
-          />
-        </div>
+        {!user && (
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Password
+            </label>
+            <input
+              type="password"
+              required
+              name="password"
+              placeholder="Password"
+              className="shadow appearance-none border rounded w-full focus:shadow-outline"
+            />
+          </div>
+        )}
         <div className="flex justify-center">
           <button
             type="submit"

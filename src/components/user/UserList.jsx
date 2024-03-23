@@ -45,7 +45,7 @@ export const UserList = () => {
       </thead>
       <tbody>
         {users.map((user) => (
-          <tr key={user.id}>
+          <tr key={user._id}>
             <td className="px-5 border border-slate-300">{user.name}</td>
             <td className="px-5 border border-slate-300">{user.lastname}</td>
             <td className="px-5 border border-slate-300">{user.email}</td>
@@ -56,7 +56,7 @@ export const UserList = () => {
             <td className="px-5 border border-slate-300">
               <div className="flex flex-col items-center gap-5">
                 <Link
-                  to={`/user/${user.id}`}
+                  to={`/user/${user._id}`}
                   className="px-5 py-1 text-white bg-blue-500 rounded-lg shadow-md shadow-black/70 hover:shadow-none transition-all duration-300"
                 >
                   Editar
